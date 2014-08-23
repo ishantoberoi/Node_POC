@@ -1,7 +1,18 @@
-var utils = require('../lib/utils.js');
-//var myProfile = require('../models/apimodels/myProfile.js');
+var utils = require('../lib/utils.js').utils;
+var myprofile = require('../models/apimodels/myprofile.js').MyProfile;
 
-res.render('myProfile');
+module.exports =  function (req, res, next) {
+	var myprof = new myprofile({});
+			myprof.getData({},function(err,dat){
+				if(err){
+					next(err);
+					return;
+				}
+				res.render('myprofile',{name:dat.name});
+			});
+}
+
+
 
 
 

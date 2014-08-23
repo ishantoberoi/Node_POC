@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-
-var debug = require("debug")('node-mon');
-var app = require('../app.js');
-
-app.set('port',process.env.PORT || 3000);
-var server = app.listen(app.get('env'),function(){
-	debug('Express is running on Port '+server.address().port);
-});

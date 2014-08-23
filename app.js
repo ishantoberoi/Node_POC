@@ -10,52 +10,73 @@ var utils = require('./lib/utils.js').utils;
 var util = require('util');
 var registerRoutes = require('./routes/register.js');
 
+
 var app = express();
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-// View Engine setup
-app.use("view",path.join(__dirname + "views"));
-app.use("view engine","ejs");
-
-console.log(util.inspect(util,{showHidden:true,depth:null,colors:true}));
+/*
+console.log(util.inspect(util,{
+    depth:null,
+    colors:true
+}));
+utils.log(util.inspect(global, {
+    depth: null,
+    colors: true
+}));*/
 
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname+'public'),{maxAge:-100}));
+app.use(express.static(path.join(__dirname, 'public'), {maxAge: -100}));
 app.use(session({
-	secret:"ishant",
-	saveUninitialized:true,
-	resave:true
+    secret: 'FKPG',
+    saveUninitialized: true,
+    resave: true
 }));
 
-
-process.on("uncaughtExecption",function(e){
-	console.log("Uncaught Execption"+e);
+process.on('uncaughtException', function (e) {
+    console.log('uncaught found');
 });
+app.use('/', registerRoutes);
 
-app.use("/", reqisterRoutes);
 
-/* Error Handling on Dev */
-if(app.get('env') === "development"){
-	app.use(function(err,req,res,next){
-		console.log(err);
-		res.status(res.status || 500);
-		res.render('render',{
-			mesage:err.mesage,
-			error:err
-		});
-	});
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+/// catch 404 and forward to error handler
+/// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        console.log(err);
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
 }
 
-app.use(function(err,req,res,next){
-	res.status(res.status || 500);
-	res.render('error',{
-		message:err.message,
-		error: {}
-	});
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
+
 
 
 module.exports = app;
