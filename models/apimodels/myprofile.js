@@ -1,4 +1,4 @@
-var oo = require('../../lib/oo.js');
+var oo = require('../../lib/oo.js').inherit;
 var utils = require('../../lib/utils.js').utils;
 var ApiModel = require('./apimodel.js').ApiModel;
 var options = {
@@ -15,7 +15,7 @@ function MyProfile(opts){
 
 //Inheriting from ApiModel
 
-oo.inherit(ApiModel,MyProfile);
+oo(ApiModel,MyProfile);
 
 MyProfile.prototype.formatViewData = function(data){
 	var obj = {};
