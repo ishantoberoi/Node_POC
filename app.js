@@ -39,7 +39,7 @@ app.use(session({
 }));
 
 process.on('uncaughtException', function (e) {
-    console.log('uncaught found');
+    console.log('uncaught found'+e.stack);
 });
 app.use('/', registerRoutes);
 

@@ -23,6 +23,7 @@ MyProfile.prototype.formatViewData = function(data){
 		obj = JSON.parse(data);
 	}
 	catch(e){
+		console.log("here"+e);
 		utils.log("Cannot parse to Json "+e);
 	}
 	return obj;
