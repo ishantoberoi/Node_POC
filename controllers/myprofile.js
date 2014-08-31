@@ -18,3 +18,33 @@ module.exports =  function (req, res, next) {
 
 
 
+// 'use strict';
+// var utils = require('../lib/utils.js').utils;
+// var util = require('util');
+// var MyCards = require('../models/apimodels/MyCards.js').MyCards;
+
+
+// //var time = process.hrtime();
+// //console.log(diff[0] + diff[1] * 1e-9 + 's');
+
+// /* GET home page. */
+
+
+// module.exports = function (req, res, next) {
+//     var model = new MyCards({}),
+//         getDataPro = model.getData({});
+//     getDataPro
+//         .then(function (dat) {
+//             res.render('mycards', dat);
+
+//         }, function (e) {
+//             utils.logError(e);
+//             next(e);
+
+//         })
+//         .done(null, function (e) {
+//             utils.logError(e);
+//             next(e);
+
+//         });
+// };
